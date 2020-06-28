@@ -3,7 +3,7 @@ package com.demo.StudentRegistration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages={"com.demo.StudentRegistration.S"})
+@SpringBootApplication
 public class StudentRegistrationApplication {
 
 	public static void main(String[] args) {

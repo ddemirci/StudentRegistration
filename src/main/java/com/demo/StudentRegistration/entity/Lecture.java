@@ -36,7 +36,7 @@ public class Lecture {
 
     @ManyToMany(cascade = { CascadeType.REFRESH }, fetch = FetchType.EAGER)
     @JoinTable(name = "lectures_students" ,
-    joinColumns = {@JoinColumn(name ="lecture_id")},
-    inverseJoinColumns = {@JoinColumn(name="student_id")})
+            joinColumns = {@JoinColumn(name ="lecture_id")},
+            inverseJoinColumns = {@JoinColumn(name="student_id")})
     private Set<Student> students = new HashSet<>();
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/lectures")
 public class LectureController {
 
     private LectureRepository _lectureRepository;
@@ -21,22 +22,22 @@ public class LectureController {
         this._lectureRepository = lectureRepository;
     }
 
-    @GetMapping(path="/lectures", produces = "application/json")
+    @GetMapping(produces = "application/json")
     List<Lecture> lectures() {
         return _lectureRepository.findAll();
     }
 
-    @GetMapping(path="/lecture/{id}", produces = "application/json")
+    @GetMapping(path="/{id}", produces = "application/json")
     Lecture findLectureById(@PathVariable("id") Integer id){
-        return _lectureRepository.findById(id);
+        return _lectureRepository.findById(id).get();
     }
 
-    @PostMapping(path="/addLecture", consumes = "application/json")
+    @PostMapping(consumes = "application/json")
     void insertLecture(@RequestBody Lecture lecture){
         _lectureRepository.save(lecture);
     }
 
-    @GetMapping(path="/lecture/delete/{id}")
+    @DeleteMapping(path="/{id}")
     void deleteStudent(@PathVariable("id") Integer id){
         _lectureRepository.deleteById(id);
     }
@@ -45,3 +46,4 @@ public class LectureController {
 
     }
 }
+
