@@ -28,11 +28,9 @@ public class EnrollmentService {
     Lecture lecture = _lectureRepository.findById(enrollment.lectureId).get();
     Student student = _studentRepository.findById(enrollment.studentId).get();
 
-    student.getLectures().add(lecture);
     lecture.getStudents().add(student);
     lecture.incrementEnrolledCount();
 
-    _studentRepository.save(student);
     _lectureRepository.save(lecture);
     }
 
@@ -40,11 +38,11 @@ public class EnrollmentService {
         Lecture lecture = _lectureRepository.findById(enrollment.lectureId).get();
         Student student = _studentRepository.findById(enrollment.studentId).get();
 
-        student.getLectures().remove(lecture);
+        //student.getLectures().remove(lecture);
         lecture.getStudents().remove(student);
         lecture.decrementEnrolledCount();
 
-        _studentRepository.save(student);
+        //_studentRepository.save(student);
         _lectureRepository.save(lecture);
     }
 }

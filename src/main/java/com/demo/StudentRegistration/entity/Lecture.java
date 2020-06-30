@@ -2,13 +2,17 @@ package com.demo.StudentRegistration.entity;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import javax.persistence.*;
 
 //@AllArgsConstructor
 @Getter
 @Setter
-@Data
+@EqualsAndHashCode(of = { "code" }, callSuper = false)
+@ToString(of = { "code" }, callSuper = true)
 @Entity
 @Table(name="LECTURES")
 public class Lecture {
@@ -34,6 +38,7 @@ public class Lecture {
     private int studentsEnrolled;
 
     @ManyToMany(cascade = { CascadeType.MERGE }, fetch = FetchType.EAGER)
+    @JsonIgnore
     @JoinTable(name = "lectures_students" ,
             joinColumns = {@JoinColumn(name ="lecture_id")},
             inverseJoinColumns = {@JoinColumn(name="student_id")})

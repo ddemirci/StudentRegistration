@@ -6,10 +6,12 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-
-@Data
+@EqualsAndHashCode(of = { "name", "surname" }, callSuper = false)
 @Entity
 @Table(name="STUDENT")
 public class Student {
@@ -30,6 +32,7 @@ public class Student {
 
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "students")
+    @JsonIgnore
     private Set<Lecture> lectures = new HashSet<>();
 
     public Student(){}
