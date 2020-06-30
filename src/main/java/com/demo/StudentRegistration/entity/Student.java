@@ -3,29 +3,19 @@ package com.demo.StudentRegistration.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
-import lombok.Generated;
-import lombok.Getter;
-import lombok.Setter;
+
 
 @Data
 @Entity
-@Getter
-@Setter
-
 @Table(name="STUDENT")
 public class Student {
 
     @Id
-    @Generated
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", unique = true, nullable = false)
     private int id;
 
@@ -42,9 +32,7 @@ public class Student {
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "students")
     private Set<Lecture> lectures = new HashSet<>();
 
-    public Student(){
-
-    }
+    public Student(){}
 
     public Student(String name, String surname, int year){
         this.name = name;
@@ -52,6 +40,43 @@ public class Student {
         this.year = year;
     }
 
+    //Getter
+    public int getId() {
+        return id;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public Set<Lecture> getLectures() {
+        return lectures;
+    }
+
+    //Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public void setLectures(Set<Lecture> lectures) {
+        this.lectures = lectures;
+    }
 
     @Override
     public String toString() {

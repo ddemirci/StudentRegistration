@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Lecture {
 
     @Id
-    @Generated
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private int id;
 
@@ -33,10 +33,75 @@ public class Lecture {
     @Column(name = "StudentsEnrolled", length = 64, nullable = false)
     private int studentsEnrolled;
 
-
-    @ManyToMany(cascade = { CascadeType.REFRESH }, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = { CascadeType.MERGE }, fetch = FetchType.EAGER)
     @JoinTable(name = "lectures_students" ,
             joinColumns = {@JoinColumn(name ="lecture_id")},
             inverseJoinColumns = {@JoinColumn(name="student_id")})
+
     private Set<Student> students = new HashSet<>();
+
+    public String getInstructor() {
+        return instructor;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public int getStudentsEnrolled() {
+        return studentsEnrolled;
+    }
+
+    public int getQuota() {
+        return quota;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setInstructor(String instructor) {
+        this.instructor = instructor;
+    }
+
+    public void setQuota(int quota) {
+        this.quota = quota;
+    }
+
+    public void setStudentsEnrolled(int studentsEnrolled) {
+        this.studentsEnrolled = studentsEnrolled;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
+
+    public boolean CanBeEnrolled(){
+        return this.studentsEnrolled < this.quota;
+    }
+
+    public void incrementEnrolledCount() {this.studentsEnrolled += 1;}
+
+    public void decrementEnrolledCount(){
+        this.studentsEnrolled -= 1;
+    }
+
 }
