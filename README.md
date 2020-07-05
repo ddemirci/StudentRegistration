@@ -5,7 +5,8 @@ API Usage
 ## Students
 
 ### 1) Add a student: 
-   POST http://localhost:8080/students
+POST http://localhost:8080/students
+
 ```
 Sample Body
 {
@@ -16,14 +17,15 @@ Sample Body
 ```
 
 ### 2) Get a student with {id}: 
-    GET http://localhost:8080/students/{id}
-    If there is no student with respect to {id}, throws StudentNotFoundError.
+GET http://localhost:8080/students/{id} \
+**If there is no student with respect to {id}, throws StudentNotFoundError.**
 
 ### 3) Get all students: GET http://localhost:8080/students
+
 **If there is no student, throws StudentsNotFoundError.**
 
 ### 4)Update existing student: 
-    	PUT http://localhost:8080/students/{id}
+PUT http://localhost:8080/students/{id}
 ```	
 Sample Body
 {
@@ -35,7 +37,7 @@ Sample Body
 **If there is no student with respect to {id}, throws StudentNotFoundError.**
 
 ### 5)Get lectures of a student: 
-GET http://localhost:8080/students/lectures/{id}
+GET http://localhost:8080/students/lectures/{id} \
 **If there is no student with respect to {id}, throws StudentNotFoundError.**
 
 ## Lectures
@@ -54,11 +56,11 @@ Sample Body
 ```
 
 ### 2) Get a lecture with {id}: 
-GET http://localhost:8080/lecture/{id}
+GET http://localhost:8080/lecture/{id} \
 **If there is no lecture with respect to {id}, throws LectureNotFoundError.**
 
 ### 3) Get all lectures: 
-GET http://localhost:8080/lectures
+GET http://localhost:8080/lectures  
 **If there is no lecture, throws LecturesNotFoundError.**
 
 ### 4)Update existing lecture: 
@@ -76,7 +78,7 @@ Sample Body
 **If there is no lecture with respect to {id}, throws LectureNotFoundError.**
 
 ### 5)Get students enrolled the lecture: 
-GET http://localhost:8080/lectures/students/{id}
+GET http://localhost:8080/lectures/students/{id}  
 **If there is no lecture with respect to {id}, throws LectureNotFoundError.**
 
 ## Enrollment
