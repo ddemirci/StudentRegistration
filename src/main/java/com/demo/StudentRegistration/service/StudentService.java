@@ -33,15 +33,16 @@ public class StudentService {
         return _studentRepository.save(student);
     }
 
-    public Student UpdateStudent(Student student){
+    public boolean UpdateStudent(Student student){
         Optional<Student> _student = GetStudentById(student.getId());
         if(_student.isPresent()){
             Student dbStudent = _student.get();
             dbStudent.setName(student.getName());
             dbStudent.setSurname(student.getSurname());
             dbStudent.setYear(student.getYear());
-            return _studentRepository.save(dbStudent);
+            _studentRepository.save(dbStudent);
+            return true;
         }
-        return new Student();
+        return false;
     }
 }

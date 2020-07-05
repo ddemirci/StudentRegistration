@@ -77,6 +77,10 @@ public class Student {
         this.year = year;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setLectures(Set<Lecture> lectures) {
         this.lectures = lectures;
     }

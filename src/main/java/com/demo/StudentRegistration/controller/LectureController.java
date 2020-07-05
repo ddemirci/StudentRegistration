@@ -62,20 +62,12 @@ public class LectureController {
     ResponseEntity<LectureDTO> updateLecture(@PathVariable("id") Integer id,
                                           @RequestBody LectureDTO lectureDTO)
     {
-        Optional<Lecture> lecture = _lectureService.GetLectureById(id);
-        if(lecture.isPresent()){
-            Lecture _lecture = lecture.get();
-
-            _lecture.setName(lectureDTO.getName());
-            _lecture.setCode(lectureDTO.getCode());
-            _lecture.setInstructor(lectureDTO.getInstructor());
-            _lecture.setQuota(lectureDTO.getQuota());
-            _lecture.setStudentsEnrolled(lectureDTO.getStudentsEnrolled());
-
-            Lecture l = _lectureService.UpdateLecture(_lecture);
-            LectureDTO dto = ConvertEntityToDTO(l);
-            return ResponseEntity.ok(dto);
-        }else{
+        Lecture lecture = ConvertDTOToEntity(lectureDTO);
+        lecture.setId(id);
+        boolean isSuccess = _lectureService.UpdateLecture(lecture);
+        if(isSuccess) {
+            return ResponseEntity.ok(ConvertEntityToDTO(lecture));
+        }else {
             throw new LectureNotFoundException(id);
         }
     }
@@ -111,4 +103,3 @@ public class LectureController {
         return dto;
     }
 }
-

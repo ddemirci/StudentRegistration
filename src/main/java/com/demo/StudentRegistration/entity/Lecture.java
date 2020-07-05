@@ -99,6 +99,10 @@ public class Lecture {
         this.students = students;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public boolean CanBeEnrolled(){
         return this.studentsEnrolled < this.quota;
     }

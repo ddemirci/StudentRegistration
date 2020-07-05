@@ -33,7 +33,7 @@ public class LectureService {
         return _lectureRepository.save(lecture);
     }
 
-    public Lecture UpdateLecture(Lecture lecture){
+   public boolean UpdateLecture(Lecture lecture){
         Optional<Lecture> _lecture = GetLectureById(lecture.getId());
         if(_lecture.isPresent()){
             Lecture dbLecture = _lecture.get();
@@ -42,9 +42,10 @@ public class LectureService {
             dbLecture.setInstructor(lecture.getInstructor());
             dbLecture.setCode(lecture.getCode());
 
-            return _lectureRepository.save(dbLecture);
+            _lectureRepository.save(dbLecture);
+             return true;
         }
-        return new Lecture();
+        return false;
     }
 
     public void UpdateLectureEnrolledCount(Lecture lecture){

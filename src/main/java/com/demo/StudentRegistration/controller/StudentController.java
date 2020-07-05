@@ -2,9 +2,7 @@ package com.demo.StudentRegistration.controller;
 
 import com.demo.StudentRegistration.entity.Lecture;
 import com.demo.StudentRegistration.entity.Student;
-import com.demo.StudentRegistration.entity.dto.LectureDTO;
 import com.demo.StudentRegistration.entity.dto.StudentDTO;
-import com.demo.StudentRegistration.exceptions.LectureNotFoundException;
 import com.demo.StudentRegistration.exceptions.StudentNotFoundException;
 import com.demo.StudentRegistration.exceptions.StudentsNotFoundException;
 import com.demo.StudentRegistration.service.StudentService;
@@ -63,18 +61,12 @@ public class StudentController {
     ResponseEntity<StudentDTO> updateStudent(@PathVariable("id") Integer id,
                                              @RequestBody StudentDTO studentDTO)
     {
-        Optional<Student> student = _studentService.GetStudentById(id);
-        if(student.isPresent()){
-            Student _student = student.get();
-
-            _student.setName(studentDTO.getName());
-            _student.setSurname(studentDTO.getSurname());
-            _student.setYear(studentDTO.getYear());
-
-            Student s = _studentService.UpdateStudent(_student);
-            StudentDTO dto = ConvertEntityToDTO(s);
-            return ResponseEntity.ok(dto);
-        }else{
+        Student student = ConvertDTOToEntity(studentDTO);
+        student.setId(id);
+        boolean isSuccess = _studentService.UpdateStudent(student);
+        if(isSuccess) {
+            return ResponseEntity.ok(ConvertEntityToDTO(student));
+        }else {
             throw new StudentNotFoundException(id);
         }
     }
